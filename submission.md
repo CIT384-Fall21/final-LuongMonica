@@ -18,30 +18,36 @@
    7. -v: mount a directory that you can read and write from host and container (bidirectional). e.g: -v /myvolume /mnt/myvolume      <!-- answer -->
 
 5. What is the difference between `-` and `--` in command line parameter?
-    *                                                   <!-- answer -->
+    * `-` will read what follows as separate options. `--` will read what follows as a single option. e.g: `-rm` is interpreted as the options `-r` and `-m` while `--rm` is interpreted as the option `rm`                                                                           <!-- answer -->
 
 6. In the following code block, provide the git instructions necessary to add a new file to the remote repository: git@github.com:org/project.git (You should presume that you don't have a copy of this repository on your local computer.)
    ```
-                                                        <!-- answer -->
+   # make sure you already have your ssh keys uploaded to github                                                                      <!-- answer -->
+   git clone git@github.com:org/project.git                                                                                           <!-- answer -->
+   cd project/                                                                                                                        <!-- answer -->
+   touch file                                                                                                                         <!-- answer -->
+   git add file                                                                                                                       <!-- answer -->
+   git commit -m "added new file"                                                                                                     <!-- answer -->
+   git push                                                                                                                           <!-- answer -->
    ```
    <!-- You many add any number of lines in the above code block that you need. -->
 
 7. What do the following Apache Directive do?
    1. SSLEngine: Allows us to enable or disable the SSL engine for 
-   2. ProxyEngine:                                      <!-- answer -->
-   3. ProxyAddHeaders:                                  <!-- answer -->
-   4. ProxyPass:                                        <!-- answer -->
-   5. ProxyPassReverse:                                 <!-- answer -->
-   6. RewriteRule:                                      <!-- answer -->
-   7. Redirect:                                         <!-- answer -->
+   2. ProxyEngine: doesn't exist (at least in newer versions of Apache, couldn't find it in the docs). SSLProxyEngine, however, does exist and allows us to enable or disable ssl engine for proxying                                                                             <!-- answer -->
+   3. ProxyAddHeaders: whether or not to add proxy-related info to the backend server through the X-Forwarded-For, X-Forwarded-Host, and X-Forwarded-Server HTTP headers                                                                                                    <!-- answer -->
+   4. ProxyPass: proxies to remote server. allows use of mapping remote servers to local URL namespace. e.g: you have a vhost block for site1.internal that says `ProxyPass "/" http://site2.internal/`. this will map site2.internal's "/" to site1.internal's "/". thus, http://site1.internal/ will be proxied to http://site2.internal/                                                                                <!-- answer -->
+   5. ProxyPassReverse: cleans up the URL in the http response headers sent from the reverse proxy. so the end user doesn't know the existence of the backend servers/vhosts                                                                                                         <!-- answer -->
+   6. RewriteRule: rewrite/modify the URL for any number of purposes like cleaning up the URL to make it more presentable or redirecting to another page                                                                                                                               <!-- answer -->
+   7. Redirect: sends external redirect, telling client to get another URL                                                            <!-- answer -->
 
 8. What module needs to be enabled in order to use the Rewrite directive?
-    *                                                  <!-- answer -->
+    * rewrite                                                                                                                         <!-- answer -->
 9. What is the command to enable a new domain/vHost?
-    *                                                  <!-- answer -->
+    * sudo a2ensite newDomain.conf                                                                                                    <!-- answer -->
 
 10. What is the command to disable a new domain/vHost?
-    *                                                  <!-- answer -->
+    * sudo a2dissite newDomain.conf                                                                                                   <!-- answer -->
 
 11. What happens when a user enters a URL into the browser?
     *                                                  <!-- answer -->
