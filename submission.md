@@ -1,20 +1,21 @@
 1. What is the difference between Docker image and Docker container?
-    *                                                  <!-- answer -->
+    * An image is used to build a container. An image has all the commands/instructions, such as updating the packages or making a user. An image is needed so you can replicate a container in an automated process. A container is the actual running application and its environment. Containers can't exist without an image, but images can exist without having an associated container built from it.                          <!-- answer -->
 
 2. What is the command to build a docker image named `cit384-final`?
-    *                                                  <!-- answer -->
+    * `docker build -t cit384-final .`  (when you're in the same directory as the Dockerfile) OR                                      <!-- answer -->
+    * `docker build -t cit384-final https://github.com/nameOfRepoWhereDockerfileIs`                                                   <!-- answer -->
 
 3. What is the command to run a container with `cit384-final` image with an interactive terminal running bash?
-    *                                                  <!-- answer -->
+    * `docker run -dit cit384-final /bin/bash`                                                                                        <!-- answer -->
 
 4. When running Docker commands there are many options you can use for example to run a container named cit384 with an ubuntu image the command is: `docker run --name cit384 ubuntu`. What do the following options do? 
    1. --name: Names my container cit384
-   2. -d:                                               <!-- answer -->
-   3. --rm:                                             <!-- answer -->
-   4. -p:                                               <!-- answer -->
-   5. --add-host:                                       <!-- answer -->
-   6. -it:                                              <!-- answer -->
-   7. -v:                                               <!-- answer -->
+   2. -d: detached, makes it continue running in the background                                                                       <!-- answer -->
+   3. --rm: removes/deletes the container after you exit it                                                                           <!-- answer -->
+   4. -p: specify a port you want to map from your host to the container. e.g: -p 8080:80 maps your host port 8080 to container 80    <!-- answer -->
+   5. --add-host: add entry into /etc/hosts of the container. e.g: --add-host="site1.internal:127.0.0.1"                              <!-- answer -->
+   6. -it: interactive terminal, get a shell                                                                                          <!-- answer -->
+   7. -v: mount a directory that you can read and write from host and container (bidirectional). e.g: -v /myvolume /mnt/myvolume      <!-- answer -->
 
 5. What is the difference between `-` and `--` in command line parameter?
     *                                                   <!-- answer -->
