@@ -50,7 +50,7 @@
     * sudo a2dissite newDomain.conf                                                                                                   <!-- answer -->
 
 11. What happens when a user enters a URL into the browser?
-    *                                                  <!-- answer -->
+    * The URL is parsed, parts of the URL is used to build the request payload, a socket is established between client and server, the actual request is sent to the server, the server does some processing and sends the response back to the client. The user gets the resource they requested or see some sort of http code signaling error or information.                                                           <!-- answer -->
 
 ---
 You may earn extra credit in this part of the assignment by: 
