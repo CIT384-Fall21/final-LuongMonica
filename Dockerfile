@@ -16,7 +16,7 @@ RUN a2enmod ssl
 RUN a2enmod proxy
 RUN a2enmod proxy_http
 
-# create dir for each site, copy index.html in, setup vhost files
+# create dir for each site, copy htmls and images in
 RUN mkdir /var/www/html/mywebsite.cit384
 RUN mkdir /var/www/html/special.cit384
 RUN mkdir /var/www/html/final.cit384
@@ -49,6 +49,7 @@ RUN usermod -aG ${GROUP} ${USER2}
 # create user and public_html dir, copy files
 RUN mkdir -p /home/${USER1}/public_html/Dev
 COPY ${USER1}/public_html/index.html /home/${USER1}/public_html
+COPY images /home/${USER1}/public_html
 COPY ${USER1}/public_html/Dev/index.html /home/${USER1}/public_html/Dev
 COPY ${USER1}/public_html/Dev/.htaccess /home/${USER1}/public_html/Dev
 RUN htpasswd -cb /home/${USER1}/.htpasswd ${USER1} "passwd"
@@ -57,6 +58,8 @@ RUN chown -R ${USER1}.${USER1} /home/${USER1}
 # create user's public_html dir, copy files
 RUN mkdir /home/${USER2}/public_html
 COPY ${USER2}/public_html/index.html /home/${USER2}/public_html
+COPY images /home/${USER2}/public_html
+RUN chown -R ${USER2}.${USER2} /home/${USER2}
 
 # enable the sites
 RUN a2ensite final.cit384.conf
