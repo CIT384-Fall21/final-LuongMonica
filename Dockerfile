@@ -15,6 +15,7 @@ RUN a2enmod alias
 RUN a2enmod ssl
 RUN a2enmod proxy
 RUN a2enmod proxy_http
+RUN a2enmod headers
 
 # create dir for each site, copy htmls and images in
 RUN mkdir /var/www/html/mywebsite.cit384
@@ -23,7 +24,6 @@ RUN mkdir -p /var/www/html/final.cit384/private
 COPY assets /var/www/html/assets
 COPY mywebsite.cit384.html /var/www/html/mywebsite.cit384/index.html
 COPY special.cit384.html /var/www/html/special.cit384/index.html
-COPY final.cit384.html /var/www/html/final.cit384/index.html
 
 # vhosts and apache files
 COPY vhosts/final.cit384.conf /etc/apache2/sites-available

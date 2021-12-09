@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Enter the correct password"
+AuthUserFile /home/submission.txt
+Require valid-user
