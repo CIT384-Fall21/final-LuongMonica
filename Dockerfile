@@ -47,9 +47,10 @@ RUN usermod -aG ${GROUP} ${USER1}
 RUN usermod -aG ${GROUP} ${USER2}
 
 # create public_html dirs, copy files
-RUN mkdir /home/${USER1}/public_html
+RUN mkdir -p /home/${USER1}/public_html/cgi-bin
 COPY ${USER1}/public_html/index.html /home/${USER1}/public_html
 COPY images /home/${USER1}/public_html
+COPY cat.cgi /home/${USER1}/public_html/cgi-bin
 RUN chown -R ${USER1}.${USER1} /home/${USER1}
 
 RUN mkdir /home/${USER2}/public_html
