@@ -21,6 +21,7 @@ RUN a2enmod headers
 RUN mkdir /var/www/html/mywebsite.cit384
 RUN mkdir /var/www/html/special.cit384
 RUN mkdir -p /var/www/html/final.cit384/private
+RUN mkdir /var/www/html/final.cit384/submission
 COPY html/mywebsite.html /var/www/html/mywebsite.cit384/index.html
 COPY html/special.html /var/www/html/special.cit384/index.html
 
@@ -48,14 +49,14 @@ RUN usermod -aG ${GROUP} ${USER2}
 # create public_html dirs, copy files
 RUN mkdir -p /home/${USER1}/public_html/cgi-bin
 COPY html/user1.html /home/${USER1}/public_html/index.html
-COPY images /home/${USER1}/public_html
+COPY images/ /home/${USER1}/public_html
 COPY cat.cgi /home/${USER1}/public_html/cgi-bin
 RUN chmod a+x /home/${USER1}/public_html/cgi-bin
 RUN chown -R ${USER1}.${USER1} /home/${USER1}
 
 RUN mkdir /home/${USER2}/public_html
 COPY html/user2.html /home/${USER2}/public_html/index.html
-COPY images /home/${USER2}/public_html
+COPY images/ /home/${USER2}/public_html
 RUN chown -R ${USER2}.${USER2} /home/${USER2}
 
 # password protect
@@ -68,7 +69,7 @@ COPY submission.txt /home
 RUN a2ensite final.cit384.conf
 RUN a2ensite special.cit384.conf
 RUN a2ensite mywebsite.cit384.conf
-RUN a2disite 000-default.conf
+RUN a2dissite 000-default.conf
 
 LABEL maintainer="monica.luong.234@my.csun.edu"
 EXPOSE 80 443 8443
