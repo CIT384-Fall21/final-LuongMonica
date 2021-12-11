@@ -13,6 +13,7 @@ RUN a2enmod userdir
 RUN a2enmod autoindex
 RUN a2enmod alias
 RUN a2enmod ssl
+RUN a2enmod cgid
 RUN a2enmod proxy
 RUN a2enmod proxy_http
 RUN a2enmod headers
@@ -56,7 +57,7 @@ RUN chown -R ${USER1}.${USER1} /home/${USER1}
 
 RUN mkdir /home/${USER2}/public_html
 COPY html/user2.html /home/${USER2}/public_html/index.html
-COPY images/ /home/${USER2}/public_html
+COPY images /home/${USER2}/public_html/images
 RUN chown -R ${USER2}.${USER2} /home/${USER2}
 
 # password protect
