@@ -16,13 +16,16 @@ RUN a2enmod ssl
 RUN a2enmod cgid
 RUN a2enmod proxy
 RUN a2enmod proxy_http
+RUN a2enmod proxy_balancer
+RUN a2enmod proxy_hcheck
+RUN a2enmod lbmethod_byrequests
 RUN a2enmod headers
 
 # create dir for each site, copy htmls and images in
 RUN mkdir /var/www/html/mywebsite.cit384
 RUN mkdir /var/www/html/special.cit384
-RUN mkdir -p /var/www/html/final.cit384/private
-RUN mkdir /var/www/html/final.cit384/submission
+RUN mkdir -p /var/www/html/final.cit384/submission
+RUN mkdir /var/www/html/newsite.cit384
 COPY html/mywebsite.html /var/www/html/mywebsite.cit384/index.html
 COPY html/special.html /var/www/html/special.cit384/index.html
 
@@ -30,7 +33,7 @@ COPY html/special.html /var/www/html/special.cit384/index.html
 COPY vhosts/final.cit384.conf /etc/apache2/sites-available
 COPY vhosts/mywebsite.cit384.conf /etc/apache2/sites-available
 COPY vhosts/special.cit384.conf /etc/apache2/sites-available
-COPY ports.conf /etc/apache2
+COPY vhosts/newsite.cit384.conf /etc/apache2/sites-available
 
 # certs
 COPY certs/mywebsite.cit384.cert /etc/ssl/certs
@@ -61,17 +64,19 @@ COPY images /home/${USER2}/public_html/images
 RUN chown -R ${USER2}.${USER2} /home/${USER2}
 
 # password protect
-COPY submission.md /var/www/html/final.cit384/private
-COPY .htaccess /var/www/html/final.cit384/private
+COPY submission.md /var/www/html/final.cit384/submission
+COPY .htaccess /var/www/html/final.cit384/submission
 COPY submission.txt /home
-#RUN htpasswd -cb /home/${USER1}/.htpasswd ${USER1} "passwd"
+# how to create .htpasswd #
+#htpasswd -cb /home/${USER1}/.htpasswd ${USER1} "password"
 
 # enable the sites
 RUN a2ensite final.cit384.conf
 RUN a2ensite special.cit384.conf
 RUN a2ensite mywebsite.cit384.conf
+RUN a2ensite newsite.cit384.conf
 RUN a2dissite 000-default.conf
 
 LABEL maintainer="monica.luong.234@my.csun.edu"
-EXPOSE 80 443 8443
+EXPOSE 80 443
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
