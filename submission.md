@@ -1,3 +1,4 @@
+# Name: Monica Luong
 1. What is the difference between Docker image and Docker container?
     * An image is used to build a container. An image has all the commands/instructions, such as updating the packages or making a user. An image is needed so you can replicate a container in an automated process. A container is the actual running application and its environment. Containers can't exist without an image, but images can exist without having an associated container built from it.                          <!-- answer -->
 
