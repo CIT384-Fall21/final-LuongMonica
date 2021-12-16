@@ -67,6 +67,7 @@ RUN chown -R ${USER2}.${USER2} /home/${USER2}
 COPY submission.md /var/www/html/final.cit384/submission
 COPY .htaccess /var/www/html/final.cit384/submission
 COPY submission.txt /home
+COPY submission /home
 # how to create .htpasswd #
 #htpasswd -cb /home/${USER1}/.htpasswd ${USER1} "password"
 
